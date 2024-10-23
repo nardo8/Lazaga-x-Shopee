@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, black, red);
+            color: white;
+        }
+        .header-footer-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        .product-card {
+            margin-bottom: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+        }
+        .product-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .gradient-background {
+            background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+            padding: 15px;
+            border-radius: 8px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .logo {
+            max-width: 100px; 
+            border-radius: 75%; 
+            overflow: hidden; 
+            object-fit: cover; 
+        }   
+        
+        
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="header-footer-box text-center">
+            <img src="image.png" alt="Logo" class="logo"> <!-- Replace with your logo URL -->
+            <h1>Lazaga x Shopee</h1>
+        </div>
+        <div class="row" id="product-container">
+            <!-- Product cards will be injected here -->
+        </div>
+    </div>
+
+    <footer class="header-footer-box">
+        <p>Contact Us | Follow us on Social Media</p>
+        <p><a href="contact.html" style="color: white;">Email Us</a></p>
+    </footer>
+
+    <script>
+        // Sample JSON data
+        const products = [
+            {
+                "name": "Laptop",
+                "price": 1500.00,
+                "description": "High-performance laptop for all your needs.",
+                "stock": 5,
+                "image": "https://th.bing.com/th/id/OIP.Se1Zrl0-4zVhGbkPOu_qEgAAAA?rs=1&pid=ImgDetMain"
+            },
+            {
+                "name": "Headphones",
+                "price": 100.00,
+                "description": "Noise-cancelling headphones for immersive sound.",
+                "stock": 10,
+                "image": "https://th.bing.com/th/id/OIP.kBRdd7fWJb2qpi9AwugPAQHaFj?rs=1&pid=ImgDetMain"
+            },
+            {
+                "name": "Keyboard",
+                "price": 50.00,
+                "description": "Mechanical keyboard with customizable keys.",
+                "stock": 20,
+                "image": "https://i5.walmartimages.com/asr/110b894f-6b11-420b-83ac-d16b1fe9aa0c.379c72091a2ae4ff8ef3c645e7fcc270.jpeg"
+            }
+        ];
+
+        // Function to display products
+        function displayProducts(products) {
+            const container = document.getElementById('product-container');
+            products.forEach(product => {
+                const card = `
+                    <div class="col-md-4">
+                        <div class="card product-card">
+                            <div class="gradient-background">
+                                <img src="${product.image}" class="card-img-top product-image" alt="${product.name}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text">${product.description}</p>
+                                    <p class="card-text"><strong>Price: $${product.price.toFixed(2)}</strong></p>
+                                    <p class="card-text">${product.stock > 0 ? `In Stock: ${product.stock}` : 'Out of Stock'}</p>
+                                    <a href="#" class="btn btn-primary" ${product.stock <= 0 ? 'disabled' : ''} onclick="addToCart('${product.name}', ${product.price})">Buy Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        // Function to add item to cart
+        function addToCart(productName, price) {
+            alert(`Added ${productName} to your cart for $${price.toFixed(2)}!`);
+        }
+
+        // Call the function to display products
+        displayProducts(products);
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
