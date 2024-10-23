@@ -42,8 +42,6 @@
             overflow: hidden; 
             object-fit: cover; 
         }   
-        
-        
     </style>
 </head>
 <body>
@@ -114,7 +112,19 @@
 
         // Function to add item to cart
         function addToCart(productName, price) {
-            alert(`Added ${productName} to your cart for $${price.toFixed(2)}!`);
+            const button = event.target; // Get the button that was clicked
+            button.style.cursor = 'wait'; // Change cursor to loading state
+            button.disabled = true; // Disable the button to prevent multiple clicks
+
+            // Simulate a loading time (for demonstration purposes)
+            setTimeout(() => {
+                alert(`Added ${productName} to your cart for $${price.toFixed(2)}!`);
+                
+                // Change button color to green and update text
+                button.classList.remove('btn-primary'); // Remove primary class
+                button.classList.add('btn-success'); // Add success class
+                button.textContent = 'Added!'; // Change button text
+            }, 1000); // Simulate a 1 second delay
         }
 
         // Call the function to display products
